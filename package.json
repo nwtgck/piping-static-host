@@ -1,6 +1,6 @@
 {
   "name": "piping-static-host",
-  "version": "0.1.0-SNAPSHOT",
+  "version": "0.1.0",
   "description": "Host static files to Piping Server",
   "bin": {
     "piping-static-host": "dist/src/index.js"
