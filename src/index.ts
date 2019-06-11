@@ -6,23 +6,28 @@ import * as stream from 'stream';
 import * as url from 'url';
 import * as path from 'path';
 import * as fs from 'fs';
-import thenRequest, {ResponsePromise} from 'then-request';
+import * as request from 'request';
 import * as glob from 'glob';
 
 const REALOAD_WAIT_SEC = 10;
-
-// (from: https://stackoverflow.com/a/20100521/2885946)
-process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
 
 function sleep(millis: number): Promise<void> {
   return new Promise(resolve => setTimeout(resolve, millis));
 }
 
-function pipingSend(serverUrl: string, deployId: string, filePath: string, body: stream.Readable): ResponsePromise {
+function pipingSend(serverUrl: string, deployId: string, filePath: string, body: stream.Readable): Promise<request.Response> {
   const u = url.resolve(serverUrl, path.join(deployId, filePath));
   console.log(`URL: ${u}`);
-  return thenRequest('POST', u, {
-    body: body,
+
+  return new Promise((resolve, reject) => {
+    request.post(u, {
+      body: body,
+      // (from: https://stackoverflow.com/a/11042814/2885946)
+      rejectUnauthorized: false,
+    }, (err, res) => {
+      if (err !== null) reject(err);
+      resolve(res);
+    });
   });
 }
 
