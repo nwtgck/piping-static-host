@@ -15,8 +15,8 @@ function sleep(millis: number): Promise<void> {
   return new Promise(resolve => setTimeout(resolve, millis));
 }
 
-function pipingSend(serverUrl: string, hostId: string, filePath: string, body: stream.Readable): Promise<request.Response> {
-  const u = url.resolve(serverUrl, path.join(hostId, filePath));
+function pipingSend(serverUrl: string, hostPrefix: string, filePath: string, body: stream.Readable): Promise<request.Response> {
+  const u = url.resolve(serverUrl, path.join(hostPrefix, filePath));
   console.log(`URL: ${u}`);
 
   return new Promise((resolve, reject) => {
@@ -31,7 +31,7 @@ function pipingSend(serverUrl: string, hostId: string, filePath: string, body: s
   });
 }
 
-async function hostLoop(serverUrl: string, hostId: string, bodyFilePath: string, reqFilePath: string): Promise<void> {
+async function hostLoop(serverUrl: string, hostPrefix: string, bodyFilePath: string, reqFilePath: string): Promise<void> {
   if (!fs.statSync(bodyFilePath).isFile()) {
     return;
   }
@@ -39,7 +39,7 @@ async function hostLoop(serverUrl: string, hostId: string, bodyFilePath: string,
     console.log(`Loading ${bodyFilePath} as ${reqFilePath}...`);
     try {
       const body = fs.createReadStream(bodyFilePath);
-      const res = await pipingSend(serverUrl, hostId, reqFilePath, body);
+      const res = await pipingSend(serverUrl, hostPrefix, reqFilePath, body);
       if (res.statusCode === 200) {
         console.log(`send status: ${res.statusCode}`);
       } else {
@@ -52,11 +52,11 @@ async function hostLoop(serverUrl: string, hostId: string, bodyFilePath: string,
   }
 }
 
-export function host(serverUrl: string, hostId: string, publicDirPath: string, indexPath?: string): void {
+export function host(serverUrl: string, hostPrefix: string, publicDirPath: string, indexPath?: string): void {
   if (indexPath !== undefined) {
     // Host index paths
-    hostLoop(serverUrl, hostId, indexPath, "");
-    hostLoop(serverUrl, hostId, indexPath, "/");
+    hostLoop(serverUrl, hostPrefix, indexPath, "");
+    hostLoop(serverUrl, hostPrefix, indexPath, "/");
   }
 
   // Backup pwd
@@ -75,7 +75,7 @@ export function host(serverUrl: string, hostId: string, publicDirPath: string, i
       // Join the path
       const joinedFPath = path.join(publicDirPath, filePath);
       // Host
-      hostLoop(serverUrl, hostId, joinedFPath, filePath);
+      hostLoop(serverUrl, hostPrefix, joinedFPath, filePath);
     }
   });
 }
