@@ -1,0 +1,35 @@
+{
+  "name": "piping-static-host",
+  "version": "0.1.0-SNAPSHOT",
+  "description": "Host static files to Piping Server",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build",
+    "test": "mocha --require ts-node/register test/**/*.ts"
+  },
+  "keywords": [
+    "Piping Server",
+    "static host"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nwtgck/piping-static-host"
+  },
+  "author": "Ryo Ota",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^12.0.7"
+  },
+  "dependencies": {
+    "@types/mocha": "^5.2.7",
+    "@types/power-assert": "^1.5.0",
+    "espower-typescript": "^9.0.2",
+    "mocha": "^6.1.4",
+    "power-assert": "^1.6.1",
+    "then-request": "^6.0.2",
+    "ts-node": "^8.2.0",
+    "typescript": "^3.5.1"
+  }
+}
