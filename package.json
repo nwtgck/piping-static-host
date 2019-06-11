@@ -2,8 +2,11 @@
   "name": "piping-static-host",
   "version": "0.1.0-SNAPSHOT",
   "description": "Host static files to Piping Server",
-  "main": "dist/src/index.js",
-  "types": "dist/src/index.d.ts",
+  "bin": {
+    "piping-static-host": "dist/src/index.js"
+  },
+  "main": "dist/src/piping-static-host.js",
+  "types": "dist/src/piping-static-host.d.ts",
   "scripts": {
     "build": "tsc",
     "prepare": "npm run build",
