@@ -12,7 +12,7 @@ npm i -g nwtgck/piping-static-host#master
 ## Usage
 
 ```bash
-piping-static-host --dir=./mypublic --index=/mypublic/index.html
+piping-static-host --dir=./mypublic --index=./mypublic/index.html
 ```
 
 Then, you can access <https://piping.ml/ueM7kZ>.  
