@@ -1,18 +1,30 @@
 # piping-static-host
 Host static files to [Piping Server](https://github.com/nwtgck/piping-server)
 
-## Deploy
+## Install
 
-1. Create files in `./public_html`
-2. `ruby main.rb`
+Install via GitHub
 
-Then, you can access https://piping.ml/mydeployid/index.html.
+```bash
+npm i -g nwtgck/piping-static-host#master
+```
 
+## Usage
 
-## Customize 
+```bash
+piping-static-host --dir=./mypublic --index=/mypublic/index.html
+```
 
-You can modify some variables in `main.rb` to change
-* Piping server URL
-* Deploy ID for security
-* Path of public_html
-* Index path
+Then, you can access <https://piping.ml/ueM7kZ>.  
+Note `ueM7kZ` is auto generated. You can specify the prefix by `--host-prefix` option.
+
+Here are available options.
+```bash
+Options:
+  --help         Show help                                             [boolean]
+  --version      Show version number                                   [boolean]
+  --server-url   Piping Server URL         [string] [default: "https://ppng.ml"]
+  --host-prefix  Host prefix (default: random)                          [string]
+  --dir          Public directory path                   [string] [default: "."]
+  --index        Index file path                                        [string]
+``` 
