@@ -1,4 +1,6 @@
 # piping-static-host
+[![CircleCI](https://circleci.com/gh/nwtgck/piping-static-host.svg?style=shield)](https://circleci.com/gh/nwtgck/piping-static-host)
+
 Host static files to [Piping Server](https://github.com/nwtgck/piping-server)
 
 ## Install
@@ -12,7 +14,7 @@ npm i -g nwtgck/piping-static-host#master
 ## Usage
 
 ```bash
-piping-static-host --dir=./mypublic --index=/mypublic/index.html
+piping-static-host --dir=./mypublic --index=./mypublic/index.html
 ```
 
 Then, you can access <https://piping.ml/ueM7kZ>.  

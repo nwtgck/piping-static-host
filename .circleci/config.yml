@@ -1,0 +1,55 @@
+ANCHORS:
+ node_steps: &node_steps
+   steps:
+     - checkout
+     - run: npm install
+     - run: npm run build
+     - run:
+        name: Operational test
+        command: |
+          set -x
+          # Make hosting target directory
+          mkdir /tmp/public
+          # Make static files
+          echo "<h1>this is the top page</h1>" > /tmp/public/index.html
+          echo "<h1>About</h1>" > /tmp/public/about.html
+          # Run static hosting
+          node ./dist/src/index.js --dir=/tmp/public --index=/tmp/public/index.html --server-url=http://localhost:8181 --host-prefix='hosttest' &
+          sleep 3
+          # Check hosting several times
+          for i in {1..3} ; do
+            diff <(cat /tmp/public/about.html) <(curl localhost:8181/hosttest/about.html)
+            diff <(cat /tmp/public/index.html) <(curl localhost:8181/hosttest/index.html)
+            diff <(cat /tmp/public/index.html) <(curl localhost:8181/hosttest/)
+          done          
+
+version: 2
+jobs:
+  node_12:
+    docker:
+      - image: circleci/node:12
+      - image: nwtgck/piping-server:v0.11.4
+        command: [--http-port=8181]
+    <<: *node_steps
+
+  node_10:
+    docker:
+      - image: circleci/node:10
+      - image: nwtgck/piping-server:v0.11.4
+        command: [--http-port=8181]
+    <<: *node_steps
+
+  node_8:
+    docker:
+      - image: circleci/node:8
+      - image: nwtgck/piping-server:v0.11.4
+        command: [--http-port=8181]
+    <<: *node_steps
+
+workflows:
+  version: 2
+  node_tests:
+    jobs:
+      - node_12
+      - node_10
+      - node_8
