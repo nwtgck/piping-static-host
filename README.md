@@ -1,4 +1,6 @@
 # piping-static-host
+[![CircleCI](https://circleci.com/gh/nwtgck/piping-static-host.svg?style=shield)](https://circleci.com/gh/nwtgck/piping-static-host)
+
 Host static files to [Piping Server](https://github.com/nwtgck/piping-server)
 
 ## Install
