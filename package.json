@@ -25,7 +25,7 @@
   "devDependencies": {
     "@types/glob": "^7.1.1",
     "@types/mocha": "^5.2.7",
-    "@types/node": "^12.6.3",
+    "@types/node": "^12.6.8",
     "@types/power-assert": "^1.5.0",
     "@types/request": "^2.48.2",
     "@types/yargs": "^13.0.0",
