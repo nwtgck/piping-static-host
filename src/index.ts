@@ -19,7 +19,7 @@ const parser = yargs
   .option('server-url', {
     describe: "Piping Server URL",
     type: 'string',
-    default: 'https://ppng.ml'
+    default: 'https://piping.ml'
   })
   .option('host-prefix', {
     describe: "Host prefix (default: random)",
