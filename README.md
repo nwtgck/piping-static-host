@@ -17,7 +17,7 @@ npm i -g nwtgck/piping-static-host#master
 piping-static-host --dir=./mypublic --index=./mypublic/index.html
 ```
 
-Then, you can access <https://piping.ml/ueM7kZ>.  
+Then, you can access <https://ppng.ml/ueM7kZ>.  
 Note `ueM7kZ` is auto generated. You can specify the prefix by `--host-prefix` option.
 
 Here are available options.
