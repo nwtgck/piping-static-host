@@ -38,7 +38,7 @@ const parser = yargs
 const args = parser.parse(process.argv);
 
 const serverUrl: string  = args["server-url"];
-const hostPrefix: string = args["host-prefix"] || generateRandomHostPrefix(6);
+const hostPrefix: string = args["host-prefix"] ?? generateRandomHostPrefix(6);
 const publicDirPath: string = args["dir"];
 const indexPath: string | undefined = args["index"];
 
